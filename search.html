@@ -7,13 +7,17 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 40px;
-      text-align: center;
-      background: #f7f7f9;
+      padding: 0;
+      margin: 0;
+      background: transparent; /* No background colour */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Center vertically, safe for embedding */
     }
 
     .search-wrapper {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       background: #fff;
       padding: 12px 18px;
@@ -25,6 +29,12 @@
 
     .search-wrapper:focus-within {
       box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .search-icon {
+      font-size: 18px;
+      color: #888;
+      margin-right: 10px;
     }
 
     input[type="text"] {
@@ -40,6 +50,7 @@
 
   <form id="searchForm">
     <div class="search-wrapper">
+      <div class="search-icon">🔍</div>
       <input type="text" id="searchInput" placeholder="Search..." required>
     </div>
   </form>
@@ -54,11 +65,9 @@
 
       const targetUrl = `https://ccjosh.staffbase.rocks/search?q=${query}`;
 
-      // Navigate parent/top if embedded in iframe
+      // Navigate the top window (outside iframe)
       if (window.top && window.top !== window) {
         window.top.location.href = targetUrl;
-      } else if (window.parent && window.parent !== window) {
-        window.parent.location.href = targetUrl;
       } else {
         window.location.href = targetUrl;
       }
