@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 260px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 18px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Search</h2>
+  <form id="searchForm">
+    <input type="text" id="searchInput" placeholder="Search..." required>
+    <button type="submit">Go</button>
+  </form>
+
+  <script>
+    document.getElementById("searchForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const query = encodeURIComponent(
+        document.getElementById("searchInput").value.trim()
+      );
+
+      const targetUrl = `https://ccjosh.staffbase.rocks/search?q=${query}`;
+      window.location.href = targetUrl;
+    });
+  </script>
+
+</body>
+</html>
