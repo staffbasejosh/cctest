@@ -39,7 +39,16 @@
       );
 
       const targetUrl = `https://ccjosh.staffbase.rocks/search?q=${query}`;
-      window.location.href = targetUrl;
+
+      // Try to change the parent / top frame location (for when this is in an iframe)
+      if (window.top && window.top !== window) {
+        window.top.location.href = targetUrl;
+      } else if (window.parent && window.parent !== window) {
+        window.parent.location.href = targetUrl;
+      } else {
+        // Fallback: normal navigation if not in an iframe
+        window.location.href = targetUrl;
+      }
     });
   </script>
 
